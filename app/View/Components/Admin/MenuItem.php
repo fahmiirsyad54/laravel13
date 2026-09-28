@@ -11,7 +11,12 @@ class MenuItem extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(
+        //tambahkan 3 parameter untuk menu-item
+        public string $href,
+        public string $label,
+        public string $icon,
+    )
     {
         //
     }

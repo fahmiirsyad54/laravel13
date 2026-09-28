@@ -11,40 +11,25 @@
         </div>
 
         <ul class="space-y-1">
+            <x-admin.menu-item
+                href="/admin/dashboard"
+                label="Dashboard"
+                icon='
+                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                '
+            />
 
-            {{-- Dashboard --}}
-            <li>
-                <x-admin.menu-item
-                    href="{{ route('admin.dashboard') }}"
-                    label="Dashboard"
-                    :active="request()->routeIs('admin.dashboard')"
-                >
-                    <svg
-                        class="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                    >
-                        <path d="M10 2L2 7v11h6v-6h4v6h6V7l-8-5z"/>
-                    </svg>
-                </x-admin.menu-item>
-            </li>
-
-            {{-- Dashboard --}}
-            <li>
-                <x-admin.menu-item
-                    href="{{ route('admin.about') }}"
-                    label="About"
-                    :active="request()->routeIs('admin.about')"
-                >
-                    <svg
-                        class="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                    >
-                        <path d="M10 2L2 7v11h6v-6h4v6h6V7l-8-5z"/>
-                    </svg>
-                </x-admin.menu-item>
-            </li>
+            <x-admin.menu-item
+                href="/admin/about"
+                label="About"
+                icon='
+                    <path
+                        fill-rule="evenodd"
+                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z"
+                        clip-rule="evenodd"
+                    />'
+            />
         </ul>
 
         {{-- MASTER DATA --}}
@@ -54,23 +39,7 @@
 
         <ul class="space-y-1">
 
-            {{-- Siswa --}}
-            <li>
-                <x-admin.menu-item
-                    href="{{ route('admin.student.index') }}"
-                    label="Siswa"
-                    :active="request()->routeIs('admin.student.*')"
-                >
-                    <svg
-                        class="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                    >
-                        <path d="M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/>
-                        <path d="M2 18a8 8 0 0 1 16 0H2Z"/>
-                    </svg>
-                </x-admin.menu-item>
-            </li>
+
         </ul>
 
     </div>
