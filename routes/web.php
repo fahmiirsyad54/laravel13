@@ -27,6 +27,7 @@ Route::get('/admin/about', function () {
     return view('admin.about');
 })->name('admin.about');
 
+
 Route::prefix('admin')
     ->group(function () {
         // STUDENT
