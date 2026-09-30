@@ -1,6 +1,6 @@
 <x-admin.layout>
 
-    @php
+    {{-- @php
         $students = [
             [
                 'name' => 'Ahmad Fauzan',
@@ -40,14 +40,12 @@
             'XI PPLG 1',
             'XI PPLG 2',
         ];
-    @endphp
+    @endphp --}}
 
 
     {{-- Page Header --}}
     <div class="mb-6">
-
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">
                     Students
@@ -62,23 +60,7 @@
                 <a
                     href=""
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
-                >
-                    <svg
-                        class="w-5 h-5 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 4v16m8-8H4"
-                        />
-                    </svg>
-
-                    Tambah Siswa
-                </a>
+                >  + Tambah Siswa </a>
             </div>
 
         </div>
