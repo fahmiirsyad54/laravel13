@@ -91,13 +91,7 @@
                             --Semua Kelas--
                         </option>
 
-                        @foreach ($classrooms as $classroom)
 
-                            <option value="{{ $classroom }}">
-                                {{ $classroom }}
-                            </option>
-
-                        @endforeach
 
                     </select>
 
@@ -136,53 +130,18 @@
 
                 <tbody>
 
-                    @foreach ($students as $index => $student)
+                    @foreach ($classrooms as $index => $classroom)
 
                         <tr class="bg-white border-b">
-
-                            {{-- No --}}
                             <td class="px-6 py-4">
                                 {{ $index + 1 }}
                             </td>
-
-
-                            {{-- Name --}}
                             <td class="px-6 py-4 font-medium text-gray-900">
-                                {{ $student['name'] }}
+                                {{ $classroom['name'] }}
                             </td>
-
-
-                            {{-- NIS --}}
                             <td class="px-6 py-4">
-                                {{ $student['nis'] }}
+                                {{ $classroom['major'] }}
                             </td>
-
-
-                            {{-- Class --}}
-                            <td class="px-6 py-4">
-                                {{ $student['class'] }}
-                            </td>
-
-
-                            {{-- Status --}}
-                            <td class="px-6 py-4">
-
-                                @if ($student['status'] === 'Active')
-
-                                    <span class="px-2.5 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                                        {{ $student['status'] }}
-                                    </span>
-
-                                @else
-
-                                    <span class="px-2.5 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
-                                        {{ $student['status'] }}
-                                    </span>
-
-                                @endif
-
-                            </td>
-
                         </tr>
 
                     @endforeach

@@ -14,9 +14,9 @@ class ClassroomController extends Controller
     {
         $clasrooms = Classroom::all();
 
-        return view('admin.classroom.index', compact(
-            'classrooms'
-        ));
+        return view('admin.classroom.index', [
+            'classrooms' => $clasrooms
+        ]);
     }
 
     /**

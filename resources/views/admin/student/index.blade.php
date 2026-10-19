@@ -1,38 +1,5 @@
 <x-admin.layout>
     @php
-        $students = [
-            [
-                'name' => 'Ahmad Fauzan',
-                'nis' => '20260001',
-                'class' => 'XI PPLG 1',
-                'status' => 'Active',
-            ],
-            [
-                'name' => 'Muhammad Rizky',
-                'nis' => '20260002',
-                'class' => 'XI PPLG 2',
-                'status' => 'Active',
-            ],
-            [
-                'name' => 'Bagus Setiawan',
-                'nis' => '20260003',
-                'class' => 'XI PPLG 1',
-                'status' => 'Active',
-            ],
-            [
-                'name' => 'Dimas Pratama',
-                'nis' => '20260004',
-                'class' => 'X PPLG 1',
-                'status' => 'Inactive',
-            ],
-            [
-                'name' => 'Rizky Ramadhan',
-                'nis' => '20260005',
-                'class' => 'X PPLG 2',
-                'status' => 'Active',
-            ],
-        ];
-
         $classrooms = [
             'X PPLG 1',
             'X PPLG 2',
@@ -161,11 +128,11 @@
                         </th>
 
                         <th class="px-6 py-3">
-                            Class
+                            Classroom
                         </th>
 
                         <th class="px-6 py-3">
-                            Status
+                            Address
                         </th>
 
                     </tr>
@@ -177,22 +144,9 @@
                             <td class="px-6 py-4"> {{ $index + 1 }} </td>
                             <td class="px-6 py-4"> {{ $student['name'] }} </td>
                             <td class="px-6 py-4">{{ $student['nis'] }}</td>
-                            <td class="px-6 py-4">{{ $student['class'] }}</td>
-                            <td class="px-6 py-4">
-                                @if ($student['status'] === 'Active')
-                                    <span class="px-2.5 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-                                        {{ $student['status'] }}
-                                    </span>
+                            <td class="px-6 py-4">{{ $student['classroom'] }}</td>
+                            <td class="px-6 py-4">{{ $student['address'] }}</td>
 
-                                @else
-
-                                    <span class="px-2.5 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
-                                        {{ $student['status'] }}
-                                    </span>
-
-                                @endif
-
-                            </td>
 
                         </tr>
 
