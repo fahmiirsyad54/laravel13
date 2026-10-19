@@ -1,6 +1,5 @@
 <x-admin.layout>
-
-    {{-- @php
+    @php
         $students = [
             [
                 'name' => 'Ahmad Fauzan',
@@ -40,10 +39,8 @@
             'XI PPLG 1',
             'XI PPLG 2',
         ];
-    @endphp --}}
+    @endphp
 
-
-    {{-- Page Header --}}
     <div class="mb-6">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -66,12 +63,7 @@
         </div>
 
     </div>
-
-
-    {{-- Main Card --}}
     <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
-
-        {{-- Card Header --}}
         <div class="p-4 border-b border-gray-200 sm:p-6">
 
             <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -150,13 +142,8 @@
             </div>
 
         </div>
-
-
-        {{-- Table --}}
         <div class="relative overflow-x-auto">
-
             <table class="w-full text-sm text-left text-gray-500">
-
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
 
                     <tr>
@@ -184,43 +171,15 @@
                     </tr>
 
                 </thead>
-
-
                 <tbody>
-
                     @foreach ($students as $index => $student)
-
                         <tr class="bg-white border-b">
-
-                            {{-- No --}}
+                            <td class="px-6 py-4"> {{ $index + 1 }} </td>
+                            <td class="px-6 py-4"> {{ $student['name'] }} </td>
+                            <td class="px-6 py-4">{{ $student['nis'] }}</td>
+                            <td class="px-6 py-4">{{ $student['class'] }}</td>
                             <td class="px-6 py-4">
-                                {{ $index + 1 }}
-                            </td>
-
-
-                            {{-- Name --}}
-                            <td class="px-6 py-4 font-medium text-gray-900">
-                                {{ $student['name'] }}
-                            </td>
-
-
-                            {{-- NIS --}}
-                            <td class="px-6 py-4">
-                                {{ $student['nis'] }}
-                            </td>
-
-
-                            {{-- Class --}}
-                            <td class="px-6 py-4">
-                                {{ $student['class'] }}
-                            </td>
-
-
-                            {{-- Status --}}
-                            <td class="px-6 py-4">
-
                                 @if ($student['status'] === 'Active')
-
                                     <span class="px-2.5 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
                                         {{ $student['status'] }}
                                     </span>
