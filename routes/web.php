@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ClassroomController;
 use Illuminate\Support\Facades\Route;
 
 // Route::inertia('/', 'welcome')->name('home');
@@ -33,4 +34,7 @@ Route::prefix('admin')
         // STUDENT
         Route::get('/student', [StudentController::class, 'index'])
             ->name('admin.student.index');
+
+        Route::get('/classroom', [ClassroomController::class, 'index'])
+            ->name('admin.classroom.index');
         });
