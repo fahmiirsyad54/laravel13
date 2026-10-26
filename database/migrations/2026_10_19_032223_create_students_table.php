@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name', length: 100);
             $table->integer('nis');
-            $table->string('classroom', length: 20);
+            $table->foreignId('classroom_id')->constrained(
+                table: 'classrooms', indexName: 'students_classroom_id'
+            );
             $table->text('address');
             $table->timestamps();
         });

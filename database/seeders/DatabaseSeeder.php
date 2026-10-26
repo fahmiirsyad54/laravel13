@@ -24,14 +24,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Student::factory(10)->create();
+        // Student::factory(10)->create();
 
-        Classroom::factory(3)->create();
+        // Classroom::factory(3)->create();
 
         // Buat 5 kelas berelasi dengan students
-        // Classroom::factory(4)
-        //     ->hasStudents(10) // setiap kelas punya 10 siswa
-        //     ->create();
+        Classroom::factory(10)
+            ->hasStudents(5) // setiap kelas punya 10 siswa
+            ->create();
 
 
     }

@@ -139,13 +139,13 @@
 
                 </thead>
                 <tbody>
-                    @foreach ($students as $index => $student)
+                    @foreach ($students as $student)
                         <tr class="bg-white border-b">
-                            <td class="px-6 py-4"> {{ $index + 1 }} </td>
-                            <td class="px-6 py-4"> {{ $student['name'] }} </td>
-                            <td class="px-6 py-4">{{ $student['nis'] }}</td>
-                            <td class="px-6 py-4">{{ $student['classroom'] }}</td>
-                            <td class="px-6 py-4">{{ $student['address'] }}</td>
+                            <td class="px-6 py-4"> {{ $loop->iteration }} </td>
+                            <td class="px-6 py-4"> {{ $student->name }} </td>
+                            <td class="px-6 py-4">{{ $student->nis }}</td>
+                            <td class="px-6 py-4">{{ $student->classroom->name }}</td>
+                            <td class="px-6 py-4">{{ $student->address }}</td>
 
 
                         </tr>

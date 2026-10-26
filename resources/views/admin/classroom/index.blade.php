@@ -122,6 +122,9 @@
                         <th class="px-6 py-3">
                             Major
                         </th>
+                        <th class="px-6 py-3">
+                            Students List
+                        </th>
 
                     </tr>
 
@@ -130,17 +133,22 @@
 
                 <tbody>
 
-                    @foreach ($classrooms as $index => $classroom)
+                    @foreach ($classrooms as $classroom)
 
                         <tr class="bg-white border-b">
                             <td class="px-6 py-4">
-                                {{ $index + 1 }}
+                                {{ $loop->iteration }}
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900">
-                                {{ $classroom['name'] }}
+                                {{ $classroom->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $classroom['major'] }}
+                                {{ $classroom->major }}
+                            </td>
+                            <td class="px-6 py-4">
+                                @foreach ($classroom->students as $student)
+                                    {{ $student->name }} <br>
+                                @endforeach
                             </td>
                         </tr>
 
