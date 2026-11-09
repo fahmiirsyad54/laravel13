@@ -28,6 +28,75 @@
         </div>
 
     </div>
+
+    {{-- Alert Success --}}
+    @if (session('success'))
+        <div id="alert-success"
+            class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 border border-green-200"
+            role="alert">
+
+            <svg class="w-5 h-5 mr-3 shrink-0"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19Zm4.2 6.7-5 5a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.4l1.3 1.3 4.3-4.3a1 1 0 0 1 1.4 1.4Z"/>
+            </svg>
+
+            <div class="font-medium">
+                {{ session('success') }}
+            </div>
+
+            <button type="button"
+                onclick="document.getElementById('alert-success').remove()"
+                class="ms-auto p-1.5 text-green-500 rounded-lg hover:bg-green-200">
+                <svg class="w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 1 12 12M13 1 1 13"/>
+                </svg>
+            </button>
+        </div>
+    @endif
+
+    {{-- Alert Error --}}
+    @if (session('error'))
+        <div id="alert-error"
+            class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 border border-red-200"
+            role="alert">
+
+            <svg class="w-5 h-5 mr-3 shrink-0"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20">
+                <path d="M10 0a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15H9v-2h2v2Zm0-4H9V5h2v6Z"/>
+            </svg>
+
+            <div class="font-medium">
+                {{ session('error') }}
+            </div>
+
+            <button type="button"
+                onclick="document.getElementById('alert-error').remove()"
+                class="ms-auto p-1.5 text-red-500 rounded-lg hover:bg-red-200">
+                <svg class="w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 1 12 12M13 1 1 13"/>
+                </svg>
+            </button>
+        </div>
+    @endif
+
     <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
         <div class="p-4 border-b border-gray-200 sm:p-6">
 
@@ -91,8 +160,16 @@
                         <option value="">
                             --Semua Kelas--
                         </option>
+                        @foreach ($classrooms as $classroom)
+                            <option
+                                value="{{ $classroom->id }}"
+                                {{ old('classroom_id') == $classroom->id ? 'selected' : '' }}
+                            >
+                                {{ $classroom->name }}
+                            </option>
+                        @endforeach
 
-                        
+
 
                     </select>
 
@@ -127,6 +204,10 @@
                             Address
                         </th>
 
+                        <th class="px-6 py-3 text-center">
+                            Action
+                        </th>
+
                     </tr>
 
                 </thead>
@@ -138,6 +219,59 @@
                             <td class="px-6 py-4">{{ $student->nis }}</td>
                             <td class="px-6 py-4">{{ $student->classroom->name }}</td>
                             <td class="px-6 py-4">{{ $student->address }}</td>
+                            {{-- Action --}}
+                            <td class="px-6 py-4">
+                                <div class="flex items-center justify-center gap-2">
+
+                                    {{-- Edit --}}
+                                    <button
+                                        type="button"
+                                        data-modal-target="editStudentModal-{{ $student->id }}"
+                                        data-modal-toggle="editStudentModal-{{ $student->id }}"
+                                        class="inline-flex items-center px-3 py-2 text-xs font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600"
+                                    >
+                                        <svg class="w-4 h-4 mr-1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="m16.862 4.487 1.687-1.687a2.121 2.121 0 0 1 3 3l-11.5 11.5-4 1 1-4 9.813-9.813Z"/>
+                                        </svg>
+
+                                        Edit
+                                    </button>
+
+                                    {{-- Delete --}}
+                                    <form action="{{ route('admin.student.destroy', $student->id) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data siswa ini?')">
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                            class="inline-flex items-center px-3 py-2 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
+
+                                            <svg class="w-4 h-4 mr-1"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3m-11 0h18" />
+                                            </svg>
+
+                                            Delete
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </td>
 
 
                         </tr>
@@ -149,6 +283,13 @@
             </table>
 
         </div>
+        {{-- Modal Edit Student --}}
+        @foreach ($students as $student)
+            @include('admin.student.edit', [
+                'student' => $student,
+                'classrooms' => $classrooms
+            ])
+        @endforeach
 
     </div>
 

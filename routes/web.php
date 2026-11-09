@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\ClassroomController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,8 +35,14 @@ Route::prefix('admin')
         Route::get('/student', [StudentController::class, 'index'])
             ->name('admin.student.index');
 
-        Route::get('/student/store', [StudentController::class, 'store'])
+        Route::post('/student', [StudentController::class, 'store'])
             ->name('admin.student.store');
+
+        Route::put('/student/{student}', [StudentController::class, 'update'])
+            ->name('admin.student.update');
+
+        Route::delete('/student/{student}', [StudentController::class, 'destroy'])
+            ->name('admin.student.destroy');
 
         Route::get('/classroom', [ClassroomController::class, 'index'])
             ->name('admin.classroom.index');

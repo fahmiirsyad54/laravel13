@@ -102,7 +102,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
+        $validated = $request->validate([
+            'nis' => 'required|string|max:20|unique:students,nis,' . $student->id,
+            'name' => 'required|string|max:255',
+            'classroom_id' => 'required|exists:classrooms,id',
+            'address' => 'required|string',
+        ]);
 
+        $student->update($validated);
+
+        return redirect()
+            ->route('admin.student.index')
+            ->with('success', 'Data siswa berhasil diperbarui.');
     }
 
     /**
