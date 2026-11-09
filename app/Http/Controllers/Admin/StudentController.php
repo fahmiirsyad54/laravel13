@@ -14,13 +14,13 @@ class StudentController extends Controller
      * Menampilkan daftar siswa.
      */
     public function index(Request $request)
-    {
+{
         $students = Student::with('classroom')
             ->when($request->search, function ($query, $search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('nis', 'like', "%{$search}%")
                         ->orWhere('name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%");
+                        ->orWhere('address', 'like', "%{$search}%");
                 });
             })
             ->when($request->classroom_id, function ($query, $classroomId) {
@@ -30,7 +30,7 @@ class StudentController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        $classrooms = Classroom::orderBy('name')->get();
+        $classrooms = Classroom::query()->get();
 
         return view('admin.student.index', compact(
             'students',
@@ -43,7 +43,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $classrooms = Classroom::orderBy('name')->get();
+        $classrooms = Classroom::query()->get();
 
         return view('admin.student.create', compact('classrooms'));
     }
@@ -56,19 +56,15 @@ class StudentController extends Controller
         $validated = $request->validate([
             'nis' => 'required|string|max:20|unique:students,nis',
             'name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'gender' => 'required|in:L,P',
             'classroom_id' => 'required|exists:classrooms,id',
-            'status' => 'required|in:active,inactive',
+            'address' => 'nullable|string|max:255',
         ], [
             'nis.required' => 'NIS wajib diisi.',
             'nis.unique' => 'NIS sudah digunakan.',
             'name.required' => 'Nama siswa wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'gender.required' => 'Jenis kelamin wajib dipilih.',
             'classroom_id.required' => 'Kelas wajib dipilih.',
             'classroom_id.exists' => 'Kelas tidak ditemukan.',
-            'status.required' => 'Status wajib dipilih.',
+            'address.address' => 'Format alamat tidak valid.',
         ]);
 
         Student::create($validated);
@@ -106,29 +102,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $validated = $request->validate([
-            'nis' => 'required|string|max:20|unique:students,nis,' . $student->id,
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'gender' => 'required|in:L,P',
-            'classroom_id' => 'required|exists:classrooms,id',
-            'status' => 'required|in:active,inactive',
-        ], [
-            'nis.required' => 'NIS wajib diisi.',
-            'nis.unique' => 'NIS sudah digunakan.',
-            'name.required' => 'Nama siswa wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'gender.required' => 'Jenis kelamin wajib dipilih.',
-            'classroom_id.required' => 'Kelas wajib dipilih.',
-            'classroom_id.exists' => 'Kelas tidak ditemukan.',
-            'status.required' => 'Status wajib dipilih.',
-        ]);
 
-        $student->update($validated);
-
-        return redirect()
-            ->route('admin.student.index')
-            ->with('success', 'Data siswa berhasil diperbarui.');
     }
 
     /**

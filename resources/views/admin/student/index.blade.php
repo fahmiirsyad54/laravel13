@@ -1,13 +1,4 @@
 <x-admin.layout>
-    @php
-        $classrooms = [
-            'X PPLG 1',
-            'X PPLG 2',
-            'XI PPLG 1',
-            'XI PPLG 2',
-        ];
-    @endphp
-
     <div class="mb-6">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -21,11 +12,18 @@
             </div>
 
             <div>
-                <a
-                    href=""
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
-                >  + Tambah Siswa </a>
+                <button
+                    type="button"
+                    data-modal-target="createStudentModal"
+                    data-modal-toggle="createStudentModal"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                >
+                    + Tambah Siswa
+                </button>
             </div>
+            {{-- Modal Create Student --}}
+            @include('admin.student.create')
+
 
         </div>
 
@@ -94,13 +92,7 @@
                             --Semua Kelas--
                         </option>
 
-                        @foreach ($classrooms as $classroom)
-
-                            <option value="{{ $classroom }}">
-                                {{ $classroom }}
-                            </option>
-
-                        @endforeach
+                        
 
                     </select>
 

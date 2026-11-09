@@ -35,6 +35,9 @@ Route::prefix('admin')
         Route::get('/student', [StudentController::class, 'index'])
             ->name('admin.student.index');
 
+        Route::get('/student/store', [StudentController::class, 'store'])
+            ->name('admin.student.store');
+
         Route::get('/classroom', [ClassroomController::class, 'index'])
             ->name('admin.classroom.index');
         });
